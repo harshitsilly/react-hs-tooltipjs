@@ -1,8 +1,10 @@
 import React,{PureComponent} from 'react';
 import TooltipPopover from './TooltipPopover';
 import PropTypes from 'prop-types';
+import {throttling,debounce} from './utils';
 import {PLACEMENTS,TRIGGER} from './constants'
 import './style.css';
+
 
 class Tooltip extends PureComponent{
 constructor(props)
@@ -20,8 +22,8 @@ constructor(props)
 componentDidMount(){
   this.setBoundaryBox();
   //  attach resize event listner so the boundary box of target gets updated when the window screen resizes.
-  window.addEventListener("resize",this.setBoundaryBox,false); 
-   document.addEventListener("scroll",this.setBoundaryBox,false);
+  window.addEventListener("resize",debounce(this.setBoundaryBox,500),false); 
+   document.addEventListener("scroll",throttling(this.setBoundaryBox,500),false);
   if(this.props.trigger==="click"){
   //  attach click event listner when trigger is click
   document.addEventListener("click",this.handleOutsideClick,false); 
