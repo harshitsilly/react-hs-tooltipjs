@@ -12,9 +12,9 @@ constructor(props)
 
     this.state = {showPopover:false,targetPosition : {}};
    
-    // refs created for targetControl and tooltipComponent
+    // refs created for targetControl and targetControl
     this.targetControl = React.createRef();
-    this.tooltipComponent = React.createRef();
+    this.targetControl = React.createRef();
   }
   
 componentDidMount(){
@@ -46,7 +46,7 @@ componentWillUnmount() {
 // checks whether the click event is outside the tooltip in case of click trigger and closes the tooltip subsequently.
 handleOutsideClick =(e)=>{
 
-  if(this.tooltipComponent.current.contains(e.target)){
+  if(this.targetControl.current.contains(e.target)){
     return;
   } 
   
@@ -83,11 +83,11 @@ render(){
         onMouseOut:this.onHideTooltip,ref: this.targetControl});
  
 
-  return <div ref={this.tooltipComponent} className="tooltipComponent">
+  return <>
       <TooltipPopover showPopover={this.state.showPopover} targetPosition ={this.state.targetPosition} placement={placement} >
         {content}
         </TooltipPopover >
-  {referenceComponent}</div>;
+  {referenceComponent}</>;
 }
 }
 
